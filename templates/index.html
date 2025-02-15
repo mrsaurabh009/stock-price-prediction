@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Stock Price Prediction</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Stock Price Prediction</h1>
+        <form method="POST" action="/predict">
+            <label for="ticker">Stock Ticker:</label>
+            <input type="text" id="ticker" name="ticker" required>
+
+            <label for="start_date">Start Date:</label>
+            <input type="date" id="start_date" name="start_date" required>
+
+            <label for="end_date">End Date:</label>
+            <input type="date" id="end_date" name="end_date" required>
+
+            <label for="period">Period:</label>
+            <select id="period" name="period">
+                <option value="Daily">Daily</option>
+                <option value="Weekly">Weekly</option>
+                <option value="Monthly">Monthly</option>
+                <option value="Yearly">Yearly</option>
+            </select>
+
+            <button type="submit">Predict</button>
+        </form>
+
+        {% if predictions %}
+        <h3>Predictions for Next 7 Days:</h3>
+        <ul>
+            {% for date, price in predictions.items() %}
+                <li>{{ date }}: {{ price }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+</body>
+</html>
